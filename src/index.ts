@@ -27,23 +27,15 @@ async function getUsageStats() {
   const memPercent = ((Number(memUsed) / Number(memTotal)) * 100).toFixed(2);
 
   // Disco
-  // Convertendo bytes para GB (dividindo por 1024³)
-  const diskTotal = (disks.reduce((acc, d) => acc + d.size, 0) / (1024 ** 3)).toFixed(2); // GB
-  const diskUsed = (disks.reduce((acc, d) => acc + d.used, 0) / (1024 ** 3)).toFixed(2); // GB
+
+  const rootDisk = disks.find(d => d.mount === '/')!;
+
+  const used = disks.reduce((acc, d) => acc + d.used, 0);
+
+  const diskTotal = (rootDisk.size / (1024 ** 3)).toFixed(2); // GB
+  const diskUsed = (used / (1024 ** 3)).toFixed(2);  // GB
   const diskPercent = ((Number(diskUsed) / Number(diskTotal)) * 100).toFixed(2);
 
-  // Log para debug
-  console.log('[DEBUG] Disk information:', {
-    totalGB: diskTotal,
-    usedGB: diskUsed,
-    percent: diskPercent,
-    rawDisks: disks.map(d => ({
-      fs: d.fs,
-      size: d.size,
-      used: d.used,
-      mount: d.mount
-    }))
-  });
 
   return {
     cpu: {
