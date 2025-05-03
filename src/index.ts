@@ -1,5 +1,5 @@
 import si from 'systeminformation';
-import { prisma } from './src/prisma';
+import { prisma } from './prisma';
 
 
 if(!process.env.INTERVAL_IN_SECONDS) {
@@ -47,6 +47,7 @@ async function getUsageStats() {
 }
 
 
+console.log(`[DEBUG] Starting usage stats collection`);
 
 setInterval(async () => {
   const t = await getUsageStats();
