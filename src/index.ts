@@ -28,14 +28,23 @@ async function getUsageStats() {
 
   // Disco
 
-  const rootDisk = disks.find(d => d.mount === '/')!;
+  // const rootDisk = disks.find(d => d.mount === '/')!;
 
-  const used = disks.reduce((acc, d) => acc + d.used, 0);
+  // const used = disks.reduce((acc, d) => acc + d.used, 0);
 
-  const diskTotal = (rootDisk.size / (1024 ** 3)).toFixed(2); // GB
-  const diskUsed = (used / (1024 ** 3)).toFixed(2);  // GB
-  const diskPercent = ((Number(diskUsed) / Number(diskTotal)) * 100).toFixed(2);
+  // const diskTotal = (rootDisk.size / (1024 ** 3)).toFixed(2); // GB
+  // const diskUsed = (used / (1024 ** 3)).toFixed(2);  // GB
+  // const diskPercent = ((Number(diskUsed) / Number(diskTotal)) * 100).toFixed(2);
 
+
+  const rootDisk = disks.find(d => d.fs === '/dev/sda3');
+
+  if (!rootDisk) {
+    throw new Error('Disco /dev/sda3 não encontrado.');
+  }
+  
+  const diskTotal = (rootDisk.size / (1024 ** 3)).toFixed(2);
+  const diskUsed = (rootDisk.used / (1024 ** 3)).toFixed(2);
 
   return {
     cpu: {
