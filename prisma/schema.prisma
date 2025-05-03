@@ -14,7 +14,7 @@ datasource db {
 }
 
 model PCUsage {
-  id          String   @id @default(uuid())
+  id          Int      @id @default(autoincrement())
   coresUage   Float
   totalCores  Float
   memoryUsage Float
