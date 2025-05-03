@@ -1,6 +1,13 @@
 import si from 'systeminformation';
 import { prisma } from './src/prisma';
 
+
+if(!process.env.INTERVAL_IN_SECONDS) {
+  throw new Error('INTERVAL_IN_SECONDS is not set');
+}
+
+const interval = Number(process.env.INTERVAL_IN_SECONDS) * 1000;
+
 async function getUsageStats() {
   const [cpuLoad, mem, disks] = await Promise.all([
     si.currentLoad(),
@@ -55,4 +62,4 @@ setInterval(async () => {
   })
 
   console.log(`[DEBUG] Usage stats saved to database ${data.createdAt}`);
-}, 10000);
+}, interval);
