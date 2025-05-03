@@ -25,12 +25,7 @@ def get_usage_stats():
     # CPU
     cpu_percent = psutil.cpu_percent()
     physical_cores = psutil.cpu_count(logical=False)
-    
-    # Mantém o valor em porcentagem (0-100%)
-    cpu_usage = round(cpu_percent, 2)
-    
-    print(f"[DEBUG] CPU Usage: {cpu_usage}% (Total cores: {physical_cores})")
-    
+        
     # Memória (convertendo para MB)
     mem = psutil.virtual_memory()
     mem_total = round(mem.total / (1024 ** 2), 2)  # MB
@@ -44,7 +39,7 @@ def get_usage_stats():
     return {
         'cpu': {
             'cores': physical_cores,
-            'usage': cpu_usage  # Agora retorna a porcentagem direta
+            'usage': cpu_percent  # Agora retorna a porcentagem direta
         },
         'memory': {
             'totalGB': mem_total,
