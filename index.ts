@@ -62,4 +62,5 @@ setInterval(async () => {
   })
 
   console.log(`[DEBUG] Usage stats saved to database ${data.createdAt}`);
+  console.log(`[DEBUG] Interval: ${interval}`);
 }, interval);
