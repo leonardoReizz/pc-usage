@@ -61,15 +61,15 @@ def main():
     # Criar tabela se não existir
     cur.execute("""
         CREATE TABLE IF NOT EXISTS "PCUsage" (
-            id SERIAL PRIMARY KEY,
-            createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            coresUsage FLOAT,
-            totalCores INTEGER,
-            memoryUsage FLOAT,
-            totalMemory FLOAT,
-            diskUsage FLOAT,
-            totalDisk FLOAT
+            "id" SERIAL PRIMARY KEY,
+            "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            "coresUsage" FLOAT,
+            "totalCores" INTEGER,
+            "memoryUsage" FLOAT,
+            "totalMemory" FLOAT,
+            "diskUsage" FLOAT,
+            "totalDisk" FLOAT
         )
     """)
     conn.commit()
